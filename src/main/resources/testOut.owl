@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:owl="http://www.w3.org/2002/07/owl#"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+ xmlns:bp="http://www.biopax.org/release/biopax-level3.owl#">
+<owl:Ontology rdf:about="">
+ <owl:imports rdf:resource="http://www.biopax.org/release/biopax-level3.owl#" />
+</owl:Ontology>
+
+<bp:Protein rdf:about="ele14">
+</bp:Protein>
+
+<bp:Conversion rdf:about="ele14-ele4-ele21-">
+ <bp:right rdf:resource="ele14" />
+ <bp:right rdf:resource="ele4" />
+ <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
+</bp:Conversion>
+
+<bp:Protein rdf:about="ele5">
+</bp:Protein>
+
+<bp:Protein rdf:about="ele4">
+</bp:Protein>
+
+<bp:Conversion rdf:about="ele22-ele21-">
+ <bp:right rdf:resource="ele22" />
+ <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
+</bp:Conversion>
+
+<bp:Conversion rdf:about="ele14-ele5-ele21-">
+ <bp:right rdf:resource="ele14" />
+ <bp:right rdf:resource="ele5" />
+ <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
+</bp:Conversion>
+
+<bp:Protein rdf:about="ele22">
+</bp:Protein>
+</rdf:RDF>

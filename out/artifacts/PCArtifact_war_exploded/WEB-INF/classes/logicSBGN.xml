@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns='http://sbgn.org/libsbgn/0.2'>
+    <map language='process description'>
+        <glyph id='ele4' class='macromolecule' >
+            <bbox y='210.9418406542852' x='146.94452430129013' w='50' h='50' />
+        </glyph>
+        <glyph id='ele5' class='macromolecule' >
+            <bbox y='212.24993705312104' x='26.503831702595363' w='50' h='50' />
+        </glyph>
+        <glyph id='ele6' class='or' >
+            <bbox y='289.104474079099' x='10.30561042880803' w='50' h='50' />
+        </glyph>
+        <glyph id='ele13' class='and' >
+            <bbox y='357.2876156041232' x='103.10374933449447' w='50' h='50' />
+        </glyph>
+        <glyph id='ele14' class='macromolecule' >
+            <bbox y='391.07233495228706' x='-55.549898871864684' w='50' h='50' />
+        </glyph>
+        <glyph id='ele21' class='process' >
+            <bbox y='311.8113284663606' x='156.30475803516342' w='50' h='50' />
+        </glyph>
+        <glyph id='ele22' class='macromolecule' >
+            <bbox y='446.58129642648635' x='209.46809564021297' w='50' h='50' />
+        </glyph>
+        <arc id='ele6-ele5' target='ele5' source='ele6' class='logic arc'>
+            <start y='288.9080284750545' x='40.61613101745334'/>
+            <end y='262.999937053121' x='46.07664140335466'/>
+        </arc>
+        <arc id='ele4-ele6' target='ele6' source='ele4' class='logic arc'>
+            <start y='250.67181583959214' x='146.19452430129016'/>
+            <end y='301.31863135895674' x='57.657002464557934'/>
+        </arc>
+        <arc id='ele13-ele14' target='ele14' source='ele13' class='logic arc'>
+            <start y='387.65073446282736' x='102.91844695180683'/>
+            <end y='410.5889657827129' x='-4.799898871864684'/>
+        </arc>
+        <arc id='ele6-ele13' target='ele13' source='ele6' class='logic arc'>
+            <start y='329.3511563186602' x='56.05654247259463'/>
+            <end y='367.04093336456197' x='107.35281729070786'/>
+        </arc>
+        <arc id='ele13-ele21' target='ele21' source='ele13' class='consumption'>
+            <start y='365.55617499744915' x='147.67723638267623'/>
+            <end y='358.1813589641051' x='156.30475803516342'/>
+        </arc>
+        <arc id='ele22-ele21' target='ele21' source='ele22' class='consumption'>
+            <start y='445.83129642648635' x='224.31037308488033'/>
+            <end y='361.8113284663606' x='191.1666245937388'/>
+        </arc>
+    </map>
+</sbgn>
