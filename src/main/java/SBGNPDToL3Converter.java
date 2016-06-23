@@ -39,11 +39,13 @@ public class SBGNPDToL3Converter  {
     private static BioPAXFactory factory = BioPAXLevel.L3.getDefaultFactory();
 
     private HashMap<String, Glyph> glyphMap;
+    private HashMap<String, Arc> arcMap;
 
 
     public SBGNPDToL3Converter(){
         level3 = factory.createModel(); //create an empty model
         glyphMap = new HashMap<String, Glyph>();
+        arcMap = new HashMap<String, Arc>();
     }
 
 
@@ -85,7 +87,15 @@ public class SBGNPDToL3Converter  {
             else if(clazz.equals(COMPLEX.getClazz()) || clazz.equals(COMPLEX_MULTIMER.getClazz()))
                 entity = level3.addNew(Complex.class, g.getId());
 
-           
+            else if(clazz.equals(ASSOCIATION.getClazz()) || clazz.equals(DISSOCIATION.getClazz()))
+                level3.addNew(ComplexAssembly.class, g.getId());
+            else if(clazz.equals(PROCESS.getClazz()))
+                level3.addNew(Conversion.class, g.getId());
+//            else if (clazz.equals(CARDINALITY.getClazz())) {
+//                Stoichiometry stoc = factory.create(Stoichiometry.class, g.getId());
+//                level3.add(stoc);
+//            }
+
 
 
             //change parent class according to child's unit of information
@@ -116,16 +126,14 @@ public class SBGNPDToL3Converter  {
             }
 
 
-
+            if(entity!=null && g.getLabel()!=null)
+                entity.setDisplayName(g.getLabel().getText());
 
             //Handle complexes
             if(cx!=null && entity!=null) {
                 Complex existingCx = cx;
                 cx.addComponent(entity);
             }
-
-
-
 
             //Handle children
             convertGlyphs(g, g.getGlyph());
@@ -158,28 +166,55 @@ public class SBGNPDToL3Converter  {
 
     }
 
+
     /**
      *
-     * @param leftIds
-     * @param rightIds
-     * @param processId
+     * @param ids source or target ids
+     * @param isTarget: true if conversion type is production, false if conversion type is consumption
      */
-    public void addConversion(ArrayList<String> leftIds, ArrayList<String> rightIds, String processId){
+    public void updateConversion(Conversion cnv, ArrayList<String> ids,  boolean isTarget){
 
-        Conversion cnv = factory.create(Conversion.class,processId);
 
         cnv.setConversionDirection(ConversionDirectionType.LEFT_TO_RIGHT);
+        //Stoichiometry stoic = factory.create(Stoichiometry.class,(cnv.getUri()+"_s");
 
-        for(String id:leftIds)
-            cnv.addLeft((PhysicalEntity)level3.getByID(id));
+        //cnv.addParticipantStoichiometry(stoic);
 
-        for(String id:rightIds)
-            cnv.addRight((PhysicalEntity)level3.getByID(id));
+        if(isTarget) {
+            for (String id : ids) {
+                cnv.addRight((PhysicalEntity) level3.getByID(id));
+            }
+        }
+        else{
+            for (String id : ids) {
+                cnv.addLeft((PhysicalEntity) level3.getByID(id));
+            }
+        }
 
-
-        if(!level3.contains(cnv))
-            level3.add(cnv);
+//        if(!level3.contains(cnv))
+  //          level3.add(cnv);
     }
+
+    public void updateComplexAssembly(ComplexAssembly ca, ArrayList<String> ids, boolean isTarget) {
+
+
+
+        ca.setConversionDirection(ConversionDirectionType.LEFT_TO_RIGHT);
+
+        if(isTarget) {
+            for (String id : ids)
+                ca.addRight((PhysicalEntity) level3.getByID(id));
+        }
+        else
+
+            for(String id:ids)
+                ca.addLeft((PhysicalEntity)level3.getByID(id));
+
+
+    //    if(!level3.contains(ca))
+      //      level3.add(ca);
+    }
+
     public void addCatalysis(ArrayList<String> leftIds, ArrayList<String> rightIds, String processId) {
 
 
@@ -190,7 +225,7 @@ public class SBGNPDToL3Converter  {
         for(String id:leftIds)
             cat.addController((PhysicalEntity)level3.getByID(id));
         for(String id:rightIds)
-            cat.addController((PhysicalEntity)level3.getByID(id));
+            cat.addControlled((Process)level3.getByID(id));
 
         if(!level3.contains(cat))
             level3.add(cat);
@@ -202,8 +237,10 @@ public class SBGNPDToL3Converter  {
 
         for(String id:leftIds)
             ctrl.addController((PhysicalEntity)level3.getByID(id));
-        for(String id:rightIds)
-            ctrl.addController((PhysicalEntity)level3.getByID(id));
+        for(String id:rightIds) {
+            ctrl.addControlled((Process) level3.getByID(id));
+
+        }
 
         ctrl.setControlType(controlType);
 
@@ -211,22 +248,7 @@ public class SBGNPDToL3Converter  {
             level3.add(ctrl);
     }
 
-    public void addComplexAssembly(ArrayList<String> leftIds, ArrayList<String> rightIds, String processId) {
 
-
-        ComplexAssembly ca = factory.create(ComplexAssembly.class,processId);
-        ca.setConversionDirection(ConversionDirectionType.LEFT_TO_RIGHT);
-
-        for(String id:leftIds)
-            ca.addLeft((PhysicalEntity)level3.getByID(id));
-
-        for(String id:rightIds)
-            ca.addRight((PhysicalEntity)level3.getByID(id));
-
-
-        if(!level3.contains(ca))
-            level3.add(ca);
-    }
 
     public void addProcess(String arcClazz, ArrayList<String> sourceIds, ArrayList<String> targetIds){
 
@@ -238,11 +260,32 @@ public class SBGNPDToL3Converter  {
             processId += s + "-";
 
 
-        if(arcClazz.equals(PRODUCTION.getClazz()))
-            addConversion(sourceIds, targetIds, processId);
+        if(arcClazz.equals(PRODUCTION.getClazz())) {
 
-        else if ( arcClazz.equals(CONSUMPTION.getClazz()))
-            addConversion(targetIds, sourceIds, processId); //swap directions of source and target
+
+            if(glyphMap.get(sourceIds.get(0)).getClazz().equals(ASSOCIATION.getClazz()) || glyphMap.get(sourceIds.get(0)).getClazz().equals(DISSOCIATION.getClazz())) {
+                ComplexAssembly cnv = (ComplexAssembly)level3.getByID(sourceIds.get(0));
+                updateComplexAssembly(cnv, targetIds,true);
+            }
+            else if(glyphMap.get(sourceIds.get(0)).getClazz().equals(PROCESS.getClazz())) {
+
+                Conversion cnv = (Conversion)level3.getByID(sourceIds.get(0));
+                updateConversion(cnv, targetIds, true);
+            }
+        }
+
+        else if ( arcClazz.equals(CONSUMPTION.getClazz())) {
+            if (glyphMap.get(targetIds.get(0)).getClazz().equals(ASSOCIATION.getClazz()) || glyphMap.get(targetIds.get(0)).getClazz().equals(DISSOCIATION.getClazz())) {
+                ComplexAssembly cnv = (ComplexAssembly)level3.getByID(targetIds.get(0));
+                updateComplexAssembly(cnv, sourceIds,false);
+
+            }
+            else if (glyphMap.get(targetIds.get(0)).getClazz().equals(PROCESS.getClazz())) {
+                Conversion cnv = (Conversion)level3.getByID(targetIds.get(0));
+                updateConversion(cnv, sourceIds, false);
+            }
+
+        }
 
         else if(arcClazz.equals(CATALYSIS.getClazz()))
             addCatalysis(sourceIds, targetIds, processId);
@@ -256,8 +299,6 @@ public class SBGNPDToL3Converter  {
         else if(arcClazz.equals(MODULATION.getClazz()))
             addControl(sourceIds, targetIds, processId, null);
 
-        else if(arcClazz.equals(ASSOCIATION.getClazz()) || arcClazz.equals(DISSOCIATION.getClazz()) )
-            addComplexAssembly(sourceIds, targetIds, processId);
 
     }
 
@@ -426,14 +467,9 @@ public class SBGNPDToL3Converter  {
                         orParticipants = distribute(orParticipantsChild, orParticipants);
 
                     }
-
-
                 }
 
-
-                }
-
-
+            }
 
         }
         return orParticipants;
@@ -442,10 +478,13 @@ public class SBGNPDToL3Converter  {
     public void convertArcs(List<Arc> arcs){
         for (Arc a : arcs) {
 
+
             String sourceId = ((Glyph)a.getSource()).getId(); //ids are the same in bp and sbgn
             String targetId = ((Glyph)a.getTarget()).getId(); //ids are the same in bp and sbgn
 
             String processId = sourceId + "-" + targetId;
+
+            arcMap.put(processId, a);
 
             String arcClazz = a.getClazz();
 

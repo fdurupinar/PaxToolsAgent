@@ -8,13 +8,21 @@
  <owl:imports rdf:resource="http://www.biopax.org/release/biopax-level3.owl#" />
 </owl:Ontology>
 
+<bp:ComplexAssembly rdf:about="ele13">
+ <bp:right rdf:resource="ele0" />
+ <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
+</bp:ComplexAssembly>
+
 <bp:Protein rdf:about="ele16">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
 <bp:Protein rdf:about="ele18">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
 <bp:Control rdf:about="ele42-ele18-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele16" />
  <bp:controller rdf:resource="ele42" />
  <bp:controller rdf:resource="ele18" />
@@ -22,17 +30,15 @@
 </bp:Control>
 
 <bp:Protein rdf:about="ele17">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
 <bp:Protein rdf:about="ele19">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
-<bp:Conversion rdf:about="ele0-ele13-">
- <bp:right rdf:resource="ele0" />
- <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
-</bp:Conversion>
-
 <bp:Control rdf:about="ele43-ele19-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele17" />
  <bp:controller rdf:resource="ele43" />
  <bp:controller rdf:resource="ele19" />
@@ -40,6 +46,7 @@
 </bp:Control>
 
 <bp:Control rdf:about="ele43-ele18-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele17" />
  <bp:controller rdf:resource="ele43" />
  <bp:controller rdf:resource="ele18" />
@@ -47,6 +54,7 @@
 </bp:Control>
 
 <bp:Control rdf:about="ele42-ele18-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele17" />
  <bp:controller rdf:resource="ele42" />
  <bp:controller rdf:resource="ele18" />
@@ -54,6 +62,7 @@
 </bp:Control>
 
 <bp:Control rdf:about="ele43-ele18-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele16" />
  <bp:controller rdf:resource="ele43" />
  <bp:controller rdf:resource="ele18" />
@@ -61,9 +70,11 @@
 </bp:Control>
 
 <bp:Protein rdf:about="ele43">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
 <bp:Control rdf:about="ele42-ele19-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele17" />
  <bp:controller rdf:resource="ele42" />
  <bp:controller rdf:resource="ele19" />
@@ -71,12 +82,14 @@
 </bp:Control>
 
 <bp:Protein rdf:about="ele42">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">null</bp:displayName>
 </bp:Protein>
 
 <bp:Protein rdf:about="ele0">
 </bp:Protein>
 
 <bp:Control rdf:about="ele43-ele19-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele16" />
  <bp:controller rdf:resource="ele43" />
  <bp:controller rdf:resource="ele19" />
@@ -84,6 +97,7 @@
 </bp:Control>
 
 <bp:Control rdf:about="ele42-ele19-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
  <bp:controller rdf:resource="ele16" />
  <bp:controller rdf:resource="ele42" />
  <bp:controller rdf:resource="ele19" />
