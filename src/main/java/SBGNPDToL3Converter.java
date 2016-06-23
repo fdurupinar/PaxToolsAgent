@@ -303,6 +303,13 @@ public class SBGNPDToL3Converter  {
         return connectedArcs;
     }
 
+    /**
+     * Permute all parameters of a1 onto a2
+     * @param a1
+     * @param a2
+     * @return
+     */
+
     public ArrayList<ArrayList<String>> distribute(ArrayList<ArrayList<String>> a1, ArrayList<ArrayList<String>> a2){
         ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
 
