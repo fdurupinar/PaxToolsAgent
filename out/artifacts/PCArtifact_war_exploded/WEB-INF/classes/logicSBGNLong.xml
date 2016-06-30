@@ -2,57 +2,57 @@
 <sbgn xmlns='http://sbgn.org/libsbgn/0.2'>
     <map language='process description'>
         <glyph id='ele16' class='macromolecule' >
-            <label text='null' />
+            <label text='a' />
             <bbox y='76.69126074927276' x='46.23363984970301' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele17' class='macromolecule' >
-            <label text='null' />
+            <label text='b' />
             <bbox y='18.09679388814626' x='154.2380391190183' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele18' class='macromolecule' >
-            <label text='null' />
+            <label text='c' />
             <bbox y='409.680751170647' x='121.61937309154268' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele19' class='macromolecule' >
-            <label text='null' />
+            <label text='d' />
             <bbox y='298.2244243747773' x='10.144097561240983' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele20' class='or' >
-            <label text='null' />
+            <label text='or' />
             <bbox y='115.20004892834675' x='141.75096441660116' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele41' class='or' >
-            <label text='null' />
+            <label text='or' />
             <bbox y='304.41122134331715' x='115.41193568657673' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele42' class='macromolecule' >
-            <label text='null' />
+            <label text='g' />
             <bbox y='382.60634976069787' x='323.38575584590944' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele43' class='macromolecule' >
-            <label text='null' />
+            <label text='h' />
             <bbox y='257.16169129127616' x='408.9523977504373' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele44' class='or' >
-            <label text='null' />
+            <label text='or' />
             <bbox y='278.19021915777046' x='304.50941765511334' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele57' class='and' >
-            <label text='null' />
+            <label text='and' />
             <bbox y='213.6415517562383' x='206.1196945157801' w='50' h='50' />
             <clone/>
         </glyph>
         <glyph id='ele13' class='association' >
-            <label text='null' />
+            <label text='assoc' />
             <bbox y='124.65964179704224' x='295.38126352860263' w='50' h='50' />
             <clone/>
         </glyph>
@@ -99,7 +99,7 @@
             <start y='220.46214236077927' x='249.3562395293592'/>
             <end y='169.95704063663243' x='300.020072494024'/>
         </arc>
-        <arc id='ele0-ele13' target='ele13' source='ele0' class='consumption'>
+        <arc id='ele0-ele13' target='ele0' source='ele13' class='production'>
             <start y='9.22056517990464' x='348.16259767281747'/>
             <end y='124.39914384948925' x='325.3782369567559'/>
         </arc>

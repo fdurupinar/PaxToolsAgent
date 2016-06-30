@@ -33,6 +33,7 @@ public class PCServlet extends HttpServlet {
     private Model level3;
 
     static BioPAXIOHandler handler =  new SimpleIOHandler();
+    SBGNPDToL3Converter sbgnpdToL3Converter;
 
 
     /**
@@ -43,6 +44,7 @@ public class PCServlet extends HttpServlet {
     {
         BioPAXFactory factory = BioPAXLevel.L3.getDefaultFactory();
         level3 = factory.createModel(); //create an empty model
+        sbgnpdToL3Converter = new SBGNPDToL3Converter();
     }
 
     /**
@@ -100,9 +102,13 @@ public class PCServlet extends HttpServlet {
         else if(request.getParameter("reqType").contains("biopax")) {//convert to biopax
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             OutputStream out = new ByteArrayOutputStream();
-            String sbgnText = request.getParameter("content");
-             //   sbgnpdToL3Converter.writeL3(in);
-            //resultStr = out.toString();
+
+            try {
+                sbgnpdToL3Converter.writeL3(in, out);
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+            resultStr = out.toString();
 
         }
 

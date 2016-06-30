@@ -40,12 +40,16 @@ public class SBGNPDToL3Converter  {
 
     private HashMap<String, Glyph> glyphMap;
     private HashMap<String, Arc> arcMap;
+    private HashMap<String, EntityReference> entityReferenceMap;
+    private HashMap<String, SmallMoleculeReference> smallMoleculeReferenceMap;
 
 
     public SBGNPDToL3Converter(){
         level3 = factory.createModel(); //create an empty model
         glyphMap = new HashMap<String, Glyph>();
         arcMap = new HashMap<String, Arc>();
+        entityReferenceMap = new HashMap<String, EntityReference>();
+        smallMoleculeReferenceMap = new HashMap<String, SmallMoleculeReference>();
     }
 
 
@@ -67,25 +71,53 @@ public class SBGNPDToL3Converter  {
 
             String clazz = g.getClazz();
             PhysicalEntity entity = null;
+            String labelText = null;
+            if(g.getLabel()!=null)
+                labelText = g.getLabel().getText();
 
             //TODO: id conversion
 
             glyphMap.put(g.getId(), g);
 
-            if(clazz.equals(MACROMOLECULE.getClazz())|| clazz.equals(MACROMOLECULE_MULTIMER.getClazz()))
+            if(clazz.equals(MACROMOLECULE.getClazz())|| clazz.equals(MACROMOLECULE_MULTIMER.getClazz())) {
                 entity = level3.addNew(Protein.class, g.getId());
+                if(labelText!=null) {
+                    entity.setDisplayName(labelText);
+                    setEntityReference(entity, labelText);
+                }
+            }
 
-            else if(clazz.equals(NUCLEIC_ACID_FEATURE.getClazz()) || clazz.equals(NUCLEIC_ACID_FEATURE_MULTIMER.getClazz()))
+            else if(clazz.equals(NUCLEIC_ACID_FEATURE.getClazz()) || clazz.equals(NUCLEIC_ACID_FEATURE_MULTIMER.getClazz())) {
                 entity = level3.addNew(Dna.class, g.getId());
+                if(labelText!=null) {
+                    entity.setDisplayName(labelText);
+                    setEntityReference(entity, labelText);
+                }
+            }
 
-            else if(clazz.equals(SIMPLE_CHEMICAL.getClazz()) ||clazz.equals(SIMPLE_CHEMICAL_MULTIMER.getClazz()))
+            else if(clazz.equals(SIMPLE_CHEMICAL.getClazz()) ||clazz.equals(SIMPLE_CHEMICAL_MULTIMER.getClazz())) {
                 entity = level3.addNew(SmallMolecule.class, g.getId());
+                if(labelText!=null) {
+                    entity.setDisplayName(labelText);
+                    setSmallMoleculeReference(entity, labelText);
+                }
 
-            else if(clazz.equals(UNSPECIFIED_ENTITY.getClazz()) || clazz.equals(PERTURBING_AGENT.getClazz()))
+            }
+
+            else if(clazz.equals(UNSPECIFIED_ENTITY.getClazz()) || clazz.equals(PERTURBING_AGENT.getClazz())) {
                 entity = level3.addNew(PhysicalEntity.class, g.getId());
+                if(labelText!=null) {
+                    entity.setDisplayName(labelText);
+                    setEntityReference(entity, labelText);
+                }
+            }
 
-            else if(clazz.equals(COMPLEX.getClazz()) || clazz.equals(COMPLEX_MULTIMER.getClazz()))
+            else if(clazz.equals(COMPLEX.getClazz()) || clazz.equals(COMPLEX_MULTIMER.getClazz())) {
                 entity = level3.addNew(Complex.class, g.getId());
+                if(labelText!=null) {
+                    entity.setDisplayName(labelText);
+                }
+            }
 
             else if(clazz.equals(ASSOCIATION.getClazz()) || clazz.equals(DISSOCIATION.getClazz()))
                 level3.addNew(ComplexAssembly.class, g.getId());
@@ -102,15 +134,15 @@ public class SBGNPDToL3Converter  {
             else if(clazz.equals(UNIT_OF_INFORMATION.getClazz())){
                 if(parent!=null){ //parent should not be null
 
-                    Label label = g.getLabel();
 
-                    if(label.getText().contains("dna")) {
+
+                    if(labelText.contains("dna")) {
                         BioPAXElement existingParent = level3.getByID(parent.getId());
                         BioPAXElement newParent =factory.create(Dna.class, parent.getId());
                         level3.replace(existingParent, newParent);
 
                     }
-                    else if(label.getText().contains("rna")) {
+                    else if(labelText.contains("rna")) {
                         BioPAXElement existingParent = level3.getByID(parent.getId());
                         BioPAXElement newParent =factory.create(Rna.class, parent.getId());
                         level3.replace(existingParent, newParent);
@@ -126,8 +158,6 @@ public class SBGNPDToL3Converter  {
             }
 
 
-            if(entity!=null && g.getLabel()!=null)
-                entity.setDisplayName(g.getLabel().getText());
 
             //Handle complexes
             if(cx!=null && entity!=null) {
@@ -139,6 +169,28 @@ public class SBGNPDToL3Converter  {
             convertGlyphs(g, g.getGlyph());
 
         }
+    }
+
+    public void setEntityReference(PhysicalEntity entity, String labelText){
+
+        EntityReference reference = entityReferenceMap.get(labelText);
+        if(reference==null) { //if an entity reference does not exist
+            reference = factory.create(EntityReference.class, labelText);
+            entityReferenceMap.put(entity.getUri(), reference);
+        }
+        ((SimplePhysicalEntity) entity).setEntityReference(reference);
+
+    }
+
+    public void setSmallMoleculeReference(PhysicalEntity entity, String labelText){
+
+        SmallMoleculeReference reference = smallMoleculeReferenceMap.get(labelText);
+        if(reference==null) { //if an entity reference does not exist
+            reference = factory.create(SmallMoleculeReference.class, labelText);
+            smallMoleculeReferenceMap.put(entity.getUri(), reference);
+        }
+        ((SmallMolecule) entity).setEntityReference(reference);
+
     }
 
 
