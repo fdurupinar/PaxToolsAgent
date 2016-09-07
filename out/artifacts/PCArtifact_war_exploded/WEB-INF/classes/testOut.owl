@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:owl="http://www.w3.org/2002/07/owl#"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+ xmlns:bp="http://www.biopax.org/release/biopax-level3.owl#">
+<owl:Ontology rdf:about="">
+ <owl:imports rdf:resource="http://www.biopax.org/release/biopax-level3.owl#" />
+</owl:Ontology>
+
+<bp:ComplexAssembly rdf:about="ele13">
+ <bp:right rdf:resource="ele0" />
+ <bp:conversionDirection rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">LEFT_TO_RIGHT</bp:conversionDirection>
+</bp:ComplexAssembly>
+
+<bp:Protein rdf:about="ele16">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">a</bp:displayName>
+</bp:Protein>
+
+<bp:Protein rdf:about="ele18">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">c</bp:displayName>
+</bp:Protein>
+
+<bp:Control rdf:about="ele42-ele18-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele16" />
+ <bp:controller rdf:resource="ele42" />
+ <bp:controller rdf:resource="ele18" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Protein rdf:about="ele17">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">b</bp:displayName>
+</bp:Protein>
+
+<bp:Protein rdf:about="ele19">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">d</bp:displayName>
+</bp:Protein>
+
+<bp:Control rdf:about="ele43-ele19-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele17" />
+ <bp:controller rdf:resource="ele43" />
+ <bp:controller rdf:resource="ele19" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Control rdf:about="ele43-ele18-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele17" />
+ <bp:controller rdf:resource="ele43" />
+ <bp:controller rdf:resource="ele18" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Control rdf:about="ele42-ele18-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele17" />
+ <bp:controller rdf:resource="ele42" />
+ <bp:controller rdf:resource="ele18" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Control rdf:about="ele43-ele18-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele16" />
+ <bp:controller rdf:resource="ele43" />
+ <bp:controller rdf:resource="ele18" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Protein rdf:about="ele43">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">h</bp:displayName>
+</bp:Protein>
+
+<bp:Control rdf:about="ele42-ele19-ele17-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele17" />
+ <bp:controller rdf:resource="ele42" />
+ <bp:controller rdf:resource="ele19" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Protein rdf:about="ele42">
+ <bp:displayName rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">g</bp:displayName>
+</bp:Protein>
+
+<bp:Protein rdf:about="ele0">
+</bp:Protein>
+
+<bp:Control rdf:about="ele43-ele19-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele16" />
+ <bp:controller rdf:resource="ele43" />
+ <bp:controller rdf:resource="ele19" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+
+<bp:Control rdf:about="ele42-ele19-ele16-ele13-">
+ <bp:controlled rdf:resource="ele13" />
+ <bp:controller rdf:resource="ele16" />
+ <bp:controller rdf:resource="ele42" />
+ <bp:controller rdf:resource="ele19" />
+ <bp:controlType rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">ACTIVATION</bp:controlType>
+</bp:Control>
+</rdf:RDF>

@@ -28,7 +28,7 @@ import javax.servlet.http.*;
 import javax.xml.bind.JAXBException;
 
 // Extend HttpServlet class
-public class PCServlet extends HttpServlet {
+public class PaxtoolsServlet extends HttpServlet {
 
     private Model level3;
 
@@ -89,13 +89,13 @@ public class PCServlet extends HttpServlet {
      //   SBGNPDToL3Converter sbgnpdToL3Converter = new SBGNPDToL3Converter(level3);
 
 
-
         String resultStr ="";
 
         if(request.getParameter("reqType").contains("sbgn")) {
 
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             resultStr = convertToSBGN(in);
+
 
 
         }
@@ -112,22 +112,22 @@ public class PCServlet extends HttpServlet {
 
         }
 
-
-        else if(request.getParameter("reqType").contains("addNode")) {
-            String nodeInfo = request.getParameter("content");
-        //    resultStr = sbgnpdToL3Converter.addNode(nodeInfo);
-
-        }
-        else if(request.getParameter("reqType").contains("unitOfInformation")) {
-            String id = request.getParameter("id");
-            String unitOfInformation = request.getParameter("unitOfInformation");
-
-//            if(!unitOfInformation.isEmpty())
-//                resultStr = sbgnpdToL3Converter.changeUnitOfInformation(id, unitOfInformation);
-//            else
-//                resultStr = "ERROR";
-        }
-
+//
+//        else if(request.getParameter("reqType").contains("addNode")) {
+//            String nodeInfo = request.getParameter("content");
+//        //    resultStr = sbgnpdToL3Converter.addNode(nodeInfo);
+//
+//        }
+//        else if(request.getParameter("reqType").contains("unitOfInformation")) {
+//            String id = request.getParameter("id");
+//            String unitOfInformation = request.getParameter("unitOfInformation");
+//
+////            if(!unitOfInformation.isEmpty())
+////                resultStr = sbgnpdToL3Converter.changeUnitOfInformation(id, unitOfInformation);
+////            else
+////                resultStr = "ERROR";
+//        }
+//
 
 
         // Actual logic goes here.
