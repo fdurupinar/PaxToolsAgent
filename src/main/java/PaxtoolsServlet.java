@@ -111,6 +111,20 @@ public class PaxtoolsServlet extends HttpServlet {
             resultStr = out.toString();
 
         }
+        else if(request.getParameter("reqType").contains("partialBiopax")) {//convert to biopax
+            InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
+            OutputStream out = new ByteArrayOutputStream();
+
+            try {
+                SBGNPDToL3Converter conv = new SBGNPDToL3Converter(); //get a new converter
+                conv.writeL3(in, out);
+
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+            resultStr = out.toString();
+
+        }
 
 //
 //        else if(request.getParameter("reqType").contains("addNode")) {
