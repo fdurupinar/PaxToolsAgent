@@ -93,9 +93,9 @@ public class PaxtoolsServlet extends HttpServlet {
 
         if(request.getParameter("reqType").contains("sbgn")) {
 
+
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             resultStr = convertToSBGN(in);
-
 
 
         }
