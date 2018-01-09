@@ -1,5 +1,7 @@
-// Import required java libraries
-
+/*
+ * Sample application to convert from SBGN to Biopax
+ * Author: Funda Durupinar Babur<f.durupinar@gmail.com>
+ */
 
 import org.biopax.paxtools.model.BioPAXElement;
 import org.biopax.paxtools.model.BioPAXFactory;
