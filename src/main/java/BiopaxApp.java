@@ -29,9 +29,19 @@ public class BiopaxApp {
         //File fIn = new File("src/main/resources/testFile.xml");
         File fIn = new File("src/main/resources/logicSBGNLong.xml");
         InputStream in = new FileInputStream(fIn);
+//
+//        File fOut = new File("src/main/resources/testOut.owl");
+//        FileOutputStream out = new FileOutputStream(fOut);
+//        conv.writeL3(in, out) ;
 
-        File fOut = new File("src/main/resources/testOut.owl");
-        FileOutputStream out = new FileOutputStream(fOut);
-        conv.writeL3(in, out) ;
+
+        //write to console instead
+        OutputStream out = new ByteArrayOutputStream();
+
+        conv.writeL3(in, out);
+
+        System.out.println(out.toString());
+
+
     }
 }

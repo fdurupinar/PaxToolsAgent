@@ -106,6 +106,7 @@ public class PaxtoolsServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
+
             resultStr = out.toString();
 
         }
@@ -128,6 +129,7 @@ public class PaxtoolsServlet extends HttpServlet {
 
         PrintWriter outPrint = response.getWriter();
 
+        System.out.println(resultStr);
         outPrint.println(resultStr);
 
 

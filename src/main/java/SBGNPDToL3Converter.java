@@ -486,8 +486,8 @@ public class SBGNPDToL3Converter  {
 
                 ArrayList<Arc> connectedArcs = findConnectedArcs(rootG, currentArc, arcs);
 
-                for (Arc a1:connectedArcs)
-                    System.out.println("and root= " + rootG.getId() +  " connectedArcs = " + a1.getId() + " currentArc: " + currentArc.getId());
+//                for (Arc a1:connectedArcs)
+//                    System.out.println("and root= " + rootG.getId() +  " connectedArcs = " + a1.getId() + " currentArc: " + currentArc.getId());
 
                 for (Arc a: connectedArcs) {
                   //  System.out.println("a.getId() = " + a.getId() + " " + rootG.getId());
@@ -555,7 +555,7 @@ public class SBGNPDToL3Converter  {
 
                 for (ArrayList<String> sp : sourceParticipants)
                     for (ArrayList<String> tp : targetParticipants) {
-                        System.out.println("sp tp = " + sp + " " + tp);
+//                        System.out.println("sp tp = " + sp + " " + tp);
                         addProcess(arcClazz, sp, tp);
                     }
             }
