@@ -119,6 +119,15 @@
             <version>5.0.0-SNAPSHOT</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-parent -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-parent</artifactId>
+            <version>1.7.25</version>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>apache-jena-libs</artifactId>
