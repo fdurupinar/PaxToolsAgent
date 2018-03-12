@@ -592,9 +592,12 @@ public class SBGNPDToL3Converter  {
 
         JAXBContext context = JAXBContext.newInstance("org.sbgn.bindings");
         Unmarshaller unmarshaller = context.createUnmarshaller();
+
         Sbgn sbgn = (Sbgn)unmarshaller.unmarshal(in);
 
+
         createL3(sbgn);
+
 
         SimpleIOHandler io = new SimpleIOHandler();
         io.convertToOWL(level3, out);

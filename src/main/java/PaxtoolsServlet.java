@@ -26,6 +26,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.xml.bind.JAXBException;
 
+import org.apache.log4j.BasicConfigurator;
+
 // Extend HttpServlet class
 public class PaxtoolsServlet extends HttpServlet {
 
@@ -44,6 +46,9 @@ public class PaxtoolsServlet extends HttpServlet {
         BioPAXFactory factory = BioPAXLevel.L3.getDefaultFactory();
         level3 = factory.createModel(); //create an empty model
         sbgnpdToL3Converter = new SBGNPDToL3Converter();
+
+//        BasicConfigurator.configure();
+
     }
 
     /**
@@ -99,8 +104,12 @@ public class PaxtoolsServlet extends HttpServlet {
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             OutputStream out = new ByteArrayOutputStream();
 
+
             try {
-                sbgnpdToL3Converter.writeL3(in, out);
+                SBGNPDToL3Converter conv = new SBGNPDToL3Converter(); //get a new converter
+                conv.writeL3(in, out);
+
+                conv = null; //gc will clean this
             }
             catch (JAXBException e) {
                 e.printStackTrace();
@@ -108,6 +117,10 @@ public class PaxtoolsServlet extends HttpServlet {
 
 
             resultStr = out.toString();
+
+
+
+
 
         }
         else if(request.getParameter("reqType").contains("partialBiopax")) {//convert to biopax
@@ -117,6 +130,7 @@ public class PaxtoolsServlet extends HttpServlet {
             try {
                 SBGNPDToL3Converter conv = new SBGNPDToL3Converter(); //get a new converter
                 conv.writeL3(in, out);
+                conv = null; //gc will clean this
 
             }
             catch (JAXBException e) {
@@ -129,10 +143,10 @@ public class PaxtoolsServlet extends HttpServlet {
 
         PrintWriter outPrint = response.getWriter();
 
-        System.out.println(resultStr);
+//        System.out.println(resultStr);
         outPrint.println(resultStr);
 
-
+        System.gc();
 
     }
 
