@@ -34,39 +34,29 @@
                     </configuration>
                 </plugin>
                 <!--<plugin>-->
-                    <!--<groupId>org.apache.tomcat.maven</groupId>-->
-                    <!--<artifactId>tomcat-maven-plugin</artifactId>-->
-                    <!--<version>2.2</version>-->
-                    <!--<configuration>-->
-                        <!--<url>http://localhost:8080/manager/text</url>-->
-                        <!--<server>localhost</server>-->
-                    <!--</configuration>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat-maven-plugin</artifactId>-->
+                <!--<version>2.2</version>-->
+                <!--<configuration>-->
+                <!--<url>http://localhost:8080/manager/text</url>-->
+                <!--<server>localhost</server>-->
+                <!--</configuration>-->
                 <!--</plugin>-->
             </plugins>
         </pluginManagement>
         <plugins>
 
-        <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>tomcat-maven-plugin</artifactId>
-        <version>1.1</version>
-        <configuration>
-        <url>http://localhost:8080/manager/text</url>
-        <server>localhost</server>
-        </configuration>
-        </plugin>
-
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <version>1.1</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <server>TomcatServer</server>
-                    <path>/PaxtoolsServlet</path>
+                    <server>localhost</server>
                 </configuration>
             </plugin>
-    </plugins>
+
+        </plugins>
         <!-- prevent some resources from getting into war -->
         <resources>
             <resource>
@@ -80,9 +70,9 @@
 
     <dependencies>
         <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat.maven</groupId>-->
-            <!--<artifactId>tomcat-maven-plugin</artifactId>-->
-            <!--<version>2.2</version>-->
+        <!--<groupId>org.apache.tomcat.maven</groupId>-->
+        <!--<artifactId>tomcat-maven-plugin</artifactId>-->
+        <!--<version>2.2</version>-->
         <!--</dependency>-->
         <!-- http://mvnrepository.com/artifact/org.json/json -->
         <dependency>
