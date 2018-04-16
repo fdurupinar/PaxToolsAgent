@@ -47,6 +47,8 @@ public class PaxtoolsServlet extends HttpServlet {
         level3 = factory.createModel(); //create an empty model
         sbgnpdToL3Converter = new SBGNPDToL3Converter();
 
+        System.out.println("Servlet created");
+
 //        BasicConfigurator.configure();
 
     }
@@ -78,6 +80,7 @@ public class PaxtoolsServlet extends HttpServlet {
         conv.writeSBGN(level3, out);
 
 
+        System.out.println(level3);
         return out.toString();
     }
 
@@ -95,15 +98,22 @@ public class PaxtoolsServlet extends HttpServlet {
 
         String resultStr ="";
 
+        System.out.println("Doing a post");
+        System.out.println(request);
+        System.out.println(request.getParameter("reqType"));
+        System.out.println(request.getParameter("content"));
+
         if(request.getParameter("reqType").contains("sbgn")) {
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             resultStr = convertToSBGN(in);
+            System.out.println("sbgn requested");
+
 
         }
         else if(request.getParameter("reqType").contains("biopax")) {//convert to biopax
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             OutputStream out = new ByteArrayOutputStream();
-
+            System.out.println("biopax requested");
 
             try {
                 SBGNPDToL3Converter conv = new SBGNPDToL3Converter(); //get a new converter
@@ -120,7 +130,7 @@ public class PaxtoolsServlet extends HttpServlet {
 
 
 
-
+            System.out.println(resultStr);
 
         }
         else if(request.getParameter("reqType").contains("partialBiopax")) {//convert to biopax

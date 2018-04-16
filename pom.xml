@@ -20,6 +20,18 @@
             </snapshots>
         </repository>
 
+
+
+        <repository>
+            <id>biopax-repo</id>
+            <name>Biopoax</name>
+            <url>http://www.biopax.org/m2repo/releases</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+
     </repositories>
 
 
@@ -70,11 +82,16 @@
 
     <dependencies>
         <!--<dependency>-->
-        <!--<groupId>org.apache.tomcat.maven</groupId>-->
-        <!--<artifactId>tomcat-maven-plugin</artifactId>-->
-        <!--<version>2.2</version>-->
+
+
+        <!-- https://mvnrepository.com/artifact/org.biopax.paxtools/paxtools-jena-io -->
+        <!--<dependency>-->
+            <!--<groupId>org.biopax.paxtools</groupId>-->
+            <!--<artifactId>paxtools-jena-io</artifactId>-->
+            <!--<version>4.3.1</version>-->
         <!--</dependency>-->
-        <!-- http://mvnrepository.com/artifact/org.json/json -->
+
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -90,35 +107,44 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.biopax.paxtools/paxtools-core -->
         <dependency>
             <groupId>org.biopax.paxtools</groupId>
             <artifactId>paxtools-core</artifactId>
-            <version>5.0.0-SNAPSHOT</version>
+            <version>5.1.0-SNAPSHOT</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.biopax.paxtools/paxtools-query -->
         <dependency>
             <groupId>org.biopax.paxtools</groupId>
             <artifactId>paxtools-query</artifactId>
-            <version>5.0.0-SNAPSHOT</version>
+            <version>5.1.0-SNAPSHOT</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.biopax.paxtools/pattern -->
         <dependency>
             <groupId>org.biopax.paxtools</groupId>
             <artifactId>pattern</artifactId>
-            <version>5.0.0-SNAPSHOT</version>
+            <version>5.1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.biopax.paxtools/sbgn-converter -->
         <dependency>
             <groupId>org.biopax.paxtools</groupId>
             <artifactId>sbgn-converter</artifactId>
-            <version>5.0.0-SNAPSHOT</version>
+            <version>5.1.0-SNAPSHOT</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.biopax.paxtools</groupId>
             <artifactId>json-converter</artifactId>
-            <version>5.0.0-SNAPSHOT</version>
+            <version>5.1.0-SNAPSHOT</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.sbgn</groupId>-->
+            <!--<artifactId>libsbgn</artifactId>-->
+            <!--<version>0.2</version>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.biopax.paxtools:sbgn-converter:5.1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/biopax/paxtools/sbgn-converter/5.1.0-SNAPSHOT/sbgn-converter-5.1.0-20180309.120610-23.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/biopax/paxtools/sbgn-converter/5.1.0-SNAPSHOT/sbgn-converter-5.1.0-20180309.120610-23-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/biopax/paxtools/sbgn-converter/5.1.0-SNAPSHOT/sbgn-converter-5.1.0-20180309.120610-23-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
