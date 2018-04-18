@@ -107,7 +107,7 @@ public class PaxtoolsServlet extends HttpServlet {
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             resultStr = convertToSBGN(in);
             System.out.println("sbgn requested");
-//            System.out.println(resultStr);
+            System.out.println(resultStr);
 
 
         }
@@ -155,7 +155,7 @@ public class PaxtoolsServlet extends HttpServlet {
         PrintWriter outPrint = response.getWriter();
 
 //        System.out.println(resultStr);
-//        outPrint.println(resultStr);
+        outPrint.println(resultStr);
 
         System.gc();
 
