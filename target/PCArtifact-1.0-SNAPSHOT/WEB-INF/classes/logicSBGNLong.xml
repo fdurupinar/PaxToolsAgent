@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns='http://sbgn.org/libsbgn/0.2'>
+    <map language='process description'>
+        <glyph id='ele16' class='macromolecule' >
+            <label text='a' />
+            <bbox y='76.69126074927276' x='46.23363984970301' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele17' class='macromolecule' >
+            <label text='b' />
+            <bbox y='18.09679388814626' x='154.2380391190183' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele18' class='macromolecule' >
+            <label text='c' />
+            <bbox y='409.680751170647' x='121.61937309154268' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele19' class='macromolecule' >
+            <label text='d' />
+            <bbox y='298.2244243747773' x='10.144097561240983' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele20' class='or' >
+            <label text='or' />
+            <bbox y='115.20004892834675' x='141.75096441660116' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele41' class='or' >
+            <label text='or' />
+            <bbox y='304.41122134331715' x='115.41193568657673' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele42' class='macromolecule' >
+            <label text='g' />
+            <bbox y='382.60634976069787' x='323.38575584590944' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele43' class='macromolecule' >
+            <label text='h' />
+            <bbox y='257.16169129127616' x='408.9523977504373' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele44' class='or' >
+            <label text='or' />
+            <bbox y='278.19021915777046' x='304.50941765511334' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele57' class='and' >
+            <label text='and' />
+            <bbox y='213.6415517562383' x='206.1196945157801' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele13' class='association' >
+            <label text='assoc' />
+            <bbox y='124.65964179704224' x='295.38126352860263' w='50' h='50' />
+            <clone/>
+        </glyph>
+        <glyph id='ele0' class='macromolecule' >
+            <bbox y='-41.52943482009535' x='328.25640326770724' w='50' h='50' />
+        </glyph>
+        <arc id='ele16-ele20' target='ele20' source='ele16' class='logic arc'>
+            <start y='112.0726371132711' x='96.98363984970301'/>
+            <end y='130.5717110360309' x='142.8688035128765'/>
+        </arc>
+        <arc id='ele17-ele20' target='ele20' source='ele17' class='logic arc'>
+            <start y='68.84679388814627' x='175.92669622475464'/>
+            <end y='114.66035657899329' x='170.03526262175504'/>
+        </arc>
+        <arc id='ele18-ele41' target='ele41' source='ele18' class='logic arc'>
+            <start y='408.930751170647' x='145.10097063035514'/>
+            <end y='355.1165698692837' x='141.92770518046066'/>
+        </arc>
+        <arc id='ele19-ele41' target='ele41' source='ele19' class='logic arc'>
+            <start y='324.7378022951087' x='60.89409756124098'/>
+            <end y='327.90045038323314' x='114.7062928993176'/>
+        </arc>
+        <arc id='ele43-ele44' target='ele44' source='ele43' class='logic arc'>
+            <start y='287.3461909299117' x='408.2023977504373'/>
+            <end y='298.1077127347226' x='354.7528450860245'/>
+        </arc>
+        <arc id='ele42-ele44' target='ele44' source='ele42' class='logic arc'>
+            <start y='381.85634976069787' x='343.7306732872442'/>
+            <end y='328.52948695637514' x='334.0902480853515'/>
+        </arc>
+        <arc id='ele57-ele44' target='ele44' source='ele57' class='logic arc'>
+            <start y='252.76645886353924' x='252.6498942178293'/>
+            <end y='289.0653120504695' x='307.9792179530641'/>
+        </arc>
+        <arc id='ele41-ele57' target='ele57' source='ele41' class='logic arc'>
+            <start y='311.19701115537214' x='158.6137226106499'/>
+            <end y='256.8557619441833' x='212.91790759170695'/>
+        </arc>
+        <arc id='ele20-ele57' target='ele57' source='ele20' class='logic arc'>
+            <start y='161.7517024084936' x='180.8431158588641'/>
+            <end y='217.08989827609145' x='217.02754307351717'/>
+        </arc>
+        <arc id='ele57-ele13' target='ele13' source='ele57' class='stimulation'>
+            <start y='220.46214236077927' x='249.3562395293592'/>
+            <end y='169.95704063663243' x='300.020072494024'/>
+        </arc>
+        <arc id='ele0-ele13' target='ele0' source='ele13' class='production'>
+            <start y='9.22056517990464' x='348.16259767281747'/>
+            <end y='124.39914384948925' x='325.3782369567559'/>
+        </arc>
+    </map>
+</sbgn>
