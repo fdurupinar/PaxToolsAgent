@@ -78,8 +78,9 @@ public class SBGNPDToL3Converter  {
 
             //TODO: id conversion
 
-            glyphMap.put(g.getId(), g);
 
+
+            glyphMap.put(g.getId(), g);
 
 
 
@@ -151,17 +152,33 @@ public class SBGNPDToL3Converter  {
                 }
             }
 
+
             //Handle state variables
-            EntityFeature entityFeature = factory.create(ModificationFeature.class, g.getId());
-            if(g.getState()!=null) {
-                entity.addFeature(entityFeature);
+            else if(clazz.equals(STATE_VARIABLE.getClazz())) {
+                if(parent!=null) { //parent should not be null
+
+                    entity = (PhysicalEntity) level3.getByID(parent.getId());
+
+                    EntityFeature entityFeature = factory.create(ModificationFeature.class, g.getId());
+                    if(g.getState()!=null) {
+
+                        entity.addFeature(entityFeature);
+
+                    }
+
+
+                }
             }
+
+
+
 
             //Handle complexes
             if(cx!=null && entity!=null) {
                 Complex existingCx = cx;
                 cx.addComponent(entity);
             }
+
 
             //Handle children
             convertGlyphs(g, g.getGlyph());
@@ -577,7 +594,9 @@ public class SBGNPDToL3Converter  {
         Map map = sbgn.getMap();
 
         convertGlyphs(null, map.getGlyph());
+
         convertCompartments(map.getGlyph());
+
         convertArcs(map.getArc());
 
     }
