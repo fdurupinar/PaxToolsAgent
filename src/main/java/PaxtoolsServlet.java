@@ -71,7 +71,7 @@ public class PaxtoolsServlet extends HttpServlet {
                 "http://pid.nci.nih.gov/biopaxpid_685", "http://pid.nci.nih.gov/biopaxpid_678",
                 "http://pid.nci.nih.gov/biopaxpid_3119", "http://pid.nci.nih.gov/biopaxpid_3114"));
 
-        System.out.println("level3.getObjects().size() = " + level3.getObjects().size());
+//        System.out.println("level3.getObjects().size() = " + level3.getObjects().size());
 
 
         L3ToSBGNPDConverter conv = new L3ToSBGNPDConverter(
@@ -80,7 +80,7 @@ public class PaxtoolsServlet extends HttpServlet {
         conv.writeSBGN(level3, out);
 
 
-        System.out.println(level3);
+//        System.out.println(level3);
         return out.toString();
     }
 
@@ -99,7 +99,7 @@ public class PaxtoolsServlet extends HttpServlet {
         String resultStr ="";
 
         System.out.println("Doing a post");
-        System.out.println(request);
+//        System.out.println(request);
         System.out.println(request.getParameter("reqType"));
         System.out.println(request.getParameter("content"));
 
@@ -107,6 +107,7 @@ public class PaxtoolsServlet extends HttpServlet {
             InputStream in = new ByteArrayInputStream(request.getParameter("content").getBytes("UTF-8"));
             resultStr = convertToSBGN(in);
             System.out.println("sbgn requested");
+//            System.out.println(resultStr);
 
 
         }
@@ -130,7 +131,7 @@ public class PaxtoolsServlet extends HttpServlet {
 
 
 
-            System.out.println(resultStr);
+//            System.out.println(resultStr);
 
         }
         else if(request.getParameter("reqType").contains("partialBiopax")) {//convert to biopax
@@ -154,7 +155,7 @@ public class PaxtoolsServlet extends HttpServlet {
         PrintWriter outPrint = response.getWriter();
 
 //        System.out.println(resultStr);
-        outPrint.println(resultStr);
+//        outPrint.println(resultStr);
 
         System.gc();
 

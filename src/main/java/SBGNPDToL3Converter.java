@@ -80,6 +80,9 @@ public class SBGNPDToL3Converter  {
 
             glyphMap.put(g.getId(), g);
 
+
+
+
             if(clazz.equals(MACROMOLECULE.getClazz()) || clazz.equals(MACROMOLECULE_MULTIMER.getClazz())) {
                 entity = level3.addNew(Protein.class, g.getId());
                 if(labelText!=null) {
@@ -594,7 +597,6 @@ public class SBGNPDToL3Converter  {
         Unmarshaller unmarshaller = context.createUnmarshaller();
 
         Sbgn sbgn = (Sbgn)unmarshaller.unmarshal(in);
-
 
         createL3(sbgn);
 
