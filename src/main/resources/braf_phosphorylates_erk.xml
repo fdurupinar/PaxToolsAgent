@@ -1,0 +1,76 @@
+﻿<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns='http://sbgn.org/libsbgn/0.2'>
+  <map id="braf_phosphorylates_erk.sbgnml" language="process description">
+    <extension>
+      <renderInformation 
+        xmlns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation" programName="sbgnviz" programVersion="4.0.2" backgroundColor="#000000">
+        <listOfColorDefinitions>
+          <colorDefinition id="color_1" value="#ffffff7f"/>
+          <colorDefinition id="color_2" value="#555555"/>
+        </listOfColorDefinitions>
+        <listOfStyles>
+          <style id="nodeffffff0.55551.2511normalnormalHelvetica" idList="nwtN_e1d27503-a678-4d37-bf37-d73d38808f36 nwtN_24563a3b-5a4a-4be7-9721-98dae5b7b540 nwtN_fdfd32dc-ae12-41a7-9b1f-177fbead1e26">
+            <g fontSize="11" fontFamily="Helvetica" fontWeight="normal" fontStyle="normal" stroke="color_2" strokeWidth="1.25" fill="color_1"/>
+          </style>
+          <style id="nodeffffff0.55551.25" idList="nwtN_97555652-b20e-4714-b2b8-673baf956743">
+            <g stroke="color_2" strokeWidth="1.25" fill="color_1"/>
+          </style>
+          <style id="edge5551.25" idList="nwtE_61c70954-7a13-4245-a1de-68d1becc7424 nwtE_9776682e-d307-4944-bbf8-f7966a7e7de4 nwtE_dc87eeeb-89fd-4c8a-a240-1f223c17157d">
+            <g stroke="color_2" strokeWidth="1.25"/>
+          </style>
+        </listOfStyles>
+      </renderInformation>
+      <mapProperties>
+        <compoundPadding>10</compoundPadding>
+        <extraCompartmentPadding>14</extraCompartmentPadding>
+        <extraComplexPadding>10</extraComplexPadding>
+        <arrowScale>1.25</arrowScale>
+        <showComplexName>true</showComplexName>
+        <dynamicLabelSize>regular</dynamicLabelSize>
+        <fitLabelsToNodes>false</fitLabelsToNodes>
+        <fitLabelsToInfoboxes>false</fitLabelsToInfoboxes>
+        <rearrangeAfterExpandCollapse>true</rearrangeAfterExpandCollapse>
+        <animateOnDrawingChanges>true</animateOnDrawingChanges>
+        <adjustNodeLabelFontSizeAutomatically>false</adjustNodeLabelFontSizeAutomatically>
+        <enablePorts>false</enablePorts>
+        <allowCompoundNodeResize>false</allowCompoundNodeResize>
+        <mapColorScheme>black_white</mapColorScheme>
+        <defaultInfoboxHeight>12</defaultInfoboxHeight>
+        <defaultInfoboxWidth>30</defaultInfoboxWidth>
+        <mapName/>
+        <mapDescription/>
+      </mapProperties>
+    </extension>
+    <glyph id="nwtN_e1d27503-a678-4d37-bf37-d73d38808f36" class="macromolecule">
+      <label text="BRAF"/>
+      <bbox x="178" y="113.5" w="70" h="35"/>
+    </glyph>
+    <glyph id="nwtN_97555652-b20e-4714-b2b8-673baf956743" class="process">
+      <bbox x="399.5" y="121.5" w="15" h="15"/>
+    </glyph>
+    <glyph id="nwtN_24563a3b-5a4a-4be7-9721-98dae5b7b540" class="macromolecule">
+      <label text="ERK"/>
+      <bbox x="512" y="109.5" w="70" h="35"/>
+      <glyph id="nwtN_24563a3b-5a4a-4be7-9721-98dae5b7b540_0" class="state variable">
+        <state value="phosphorylation" variable=""/>
+        <bbox x="549.5" y="103.5" w="30" h="12"/>
+      </glyph>
+    </glyph>
+    <glyph id="nwtN_fdfd32dc-ae12-41a7-9b1f-177fbead1e26" class="macromolecule">
+      <label text="ERK"/>
+      <bbox x="378" y="222.5" w="70" h="35"/>
+    </glyph>
+    <arc id="nwtE_61c70954-7a13-4245-a1de-68d1becc7424" class="consumption" source="nwtN_e1d27503-a678-4d37-bf37-d73d38808f36" target="nwtN_97555652-b20e-4714-b2b8-673baf956743">
+      <start x="248.5" y="130.6340206185567"/>
+      <end x="398.875" y="129.08376288659792"/>
+    </arc>
+    <arc id="nwtE_9776682e-d307-4944-bbf8-f7966a7e7de4" class="consumption" source="nwtN_fdfd32dc-ae12-41a7-9b1f-177fbead1e26" target="nwtN_97555652-b20e-4714-b2b8-673baf956743">
+      <start x="412.02702702702703" y="222"/>
+      <end x="407.43918918918916" y="137.125"/>
+    </arc>
+    <arc id="nwtE_dc87eeeb-89fd-4c8a-a240-1f223c17157d" class="production" source="nwtN_97555652-b20e-4714-b2b8-673baf956743" target="nwtN_24563a3b-5a4a-4be7-9721-98dae5b7b540">
+      <start x="415.125" y="128.88392857142858"/>
+      <end x="508.3753188287515" y="127.55178115958925"/>
+    </arc>
+  </map>
+</sbgn>

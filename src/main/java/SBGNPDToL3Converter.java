@@ -32,8 +32,6 @@ import static org.sbgn.ArcClazz.*;
 import static org.sbgn.GlyphClazz.*;
 
 
-
-
 public class SBGNPDToL3Converter  {
 
     private Model level3;
@@ -44,7 +42,11 @@ public class SBGNPDToL3Converter  {
     private HashMap<String, Arc> arcMap;
     private HashMap<String, EntityReference> entityReferenceMap;
     private HashMap<String, SmallMoleculeReference> smallMoleculeReferenceMap;
+    private HashMap<String, ProteinReference> proteinReferenceMap;
+    private HashMap<String, DnaReference> dnaReferenceMap;
+    private HashMap<String, RnaReference> rnaReferenceMap;
 
+    private static int nextId = 0;
 
     public SBGNPDToL3Converter(){
         level3 = factory.createModel(); //create an empty model
@@ -52,6 +54,15 @@ public class SBGNPDToL3Converter  {
         arcMap = new HashMap<String, Arc>();
         entityReferenceMap = new HashMap<String, EntityReference>();
         smallMoleculeReferenceMap = new HashMap<String, SmallMoleculeReference>();
+        proteinReferenceMap = new HashMap<String, ProteinReference>();
+        dnaReferenceMap = new HashMap<String, DnaReference>();
+        rnaReferenceMap = new HashMap<String, RnaReference>();
+    }
+
+    private String getNextId(){
+        nextId++;
+        return "id" + nextId;
+
     }
 
 
@@ -79,7 +90,6 @@ public class SBGNPDToL3Converter  {
             //TODO: id conversion
 
 
-
             glyphMap.put(g.getId(), g);
 
 
@@ -88,15 +98,21 @@ public class SBGNPDToL3Converter  {
                 entity = level3.addNew(Protein.class, g.getId());
                 if(labelText!=null) {
                     entity.setDisplayName(labelText);
-                    setEntityReference(entity, labelText);
+
+                    setEntityReference(ProteinReference.class, (Protein)entity, labelText, proteinReferenceMap);
                 }
             }
 
+            //TODO: rna
             else if(clazz.equals(NUCLEIC_ACID_FEATURE.getClazz()) || clazz.equals(NUCLEIC_ACID_FEATURE_MULTIMER.getClazz())) {
                 entity = level3.addNew(Dna.class, g.getId());
                 if(labelText!=null) {
                     entity.setDisplayName(labelText);
-                    setEntityReference(entity, labelText);
+                    if(labelText.toLowerCase().contains("dna"))
+                        setEntityReference(DnaReference.class, (Dna)entity, labelText, dnaReferenceMap);
+                    else
+                        setEntityReference(RnaReference.class, (Rna)entity, labelText, rnaReferenceMap);
+
                 }
             }
 
@@ -104,7 +120,7 @@ public class SBGNPDToL3Converter  {
                 entity = level3.addNew(SmallMolecule.class, g.getId());
                 if(labelText!=null) {
                     entity.setDisplayName(labelText);
-                    setSmallMoleculeReference(entity, labelText);
+                    setEntityReference(SmallMoleculeReference.class, (SmallMolecule)entity, labelText, smallMoleculeReferenceMap);
                 }
 
             }
@@ -113,7 +129,7 @@ public class SBGNPDToL3Converter  {
                 entity = level3.addNew(PhysicalEntity.class, g.getId());
                 if(labelText!=null) {
                     entity.setDisplayName(labelText);
-                    setEntityReference(entity, labelText);
+                    setEntityReference(EntityReference.class, (SimplePhysicalEntity) entity, labelText, entityReferenceMap);
                 }
             }
 
@@ -138,7 +154,7 @@ public class SBGNPDToL3Converter  {
             //change parent class according to child's unit of information
             else if(clazz.equals(UNIT_OF_INFORMATION.getClazz())){
                 if(parent!=null){ //parent should not be null
-                    if(labelText.contains("dna")) {
+                    if(labelText.toLowerCase().contains("dna")) {
                         BioPAXElement existingParent = level3.getByID(parent.getId());
                         BioPAXElement newParent = factory.create(Dna.class, parent.getId());
                         level3.replace(existingParent, newParent);
@@ -157,19 +173,25 @@ public class SBGNPDToL3Converter  {
             else if(clazz.equals(STATE_VARIABLE.getClazz())) {
                 if(parent!=null) { //parent should not be null
 
-                    entity = (PhysicalEntity) level3.getByID(parent.getId());
+                    Glyph.State state = g.getState();
 
-                    EntityFeature entityFeature = factory.create(ModificationFeature.class, g.getId());
-                    if(g.getState()!=null) {
+                    if(state != null) {
+                        entity = (PhysicalEntity) level3.getByID(parent.getId());
+
+                        String featureId = this.getNextId();
+                        ModificationFeature entityFeature = level3.addNew(ModificationFeature.class, featureId);
+
+                        SequenceModificationVocabulary sm = level3.addNew(SequenceModificationVocabulary.class, this.getNextId());
+
+                        sm.addTerm(state.getValue());
+
+                        entityFeature.setModificationType(sm);
 
                         entity.addFeature(entityFeature);
 
                     }
-
-
                 }
             }
-
 
 
 
@@ -185,32 +207,31 @@ public class SBGNPDToL3Converter  {
         }
     }
 
-    public void setEntityReference(PhysicalEntity entity, String labelText){
-
-        EntityReference reference = entityReferenceMap.get(labelText);
-
-        if(reference == null) { //if an entity reference does not exist
-            reference = factory.create(EntityReference.class, labelText);
-            entityReferenceMap.put(entity.getUri(), reference);
-        }
-
-        ((SimplePhysicalEntity) entity).setEntityReference(reference);
-    }
-
-    public void setSmallMoleculeReference(PhysicalEntity entity, String labelText){
-
-        SmallMoleculeReference reference = smallMoleculeReferenceMap.get(labelText);
-
-        if(reference == null) { //if an entity reference does not exist
-            reference = factory.create(SmallMoleculeReference.class, labelText);
-            smallMoleculeReferenceMap.put(entity.getUri(), reference);
-        }
-
-        ((SmallMolecule) entity).setEntityReference(reference);
-    }
-
-
     /**
+     * Set state variables
+     * @param classType proteinReference, smallMoleculeReference, dnaReference, rnaReference classes
+     * @param entity
+     * @param labelText
+     * @param entityReferenceMap
+     * @param <T> ProteinReference, SmallMoleculeReference, DnaReference, RnaReference
+     * @param <S> SimplePhysicalEntity, Protein, Rna, Dna, SmallMolecule
+     */
+    public  <T extends EntityReference, S extends SimplePhysicalEntity> void setEntityReference( Class<T> classType, S entity, String labelText, HashMap<String, T> entityReferenceMap){
+
+        T reference = entityReferenceMap.get(labelText);
+
+        if(reference == null) { //if an entity reference does not exist
+            reference = level3.addNew(classType, this.getNextId());
+            entityReferenceMap.put(labelText, reference);
+        }
+
+        entity.setEntityReference(reference);
+    }
+
+
+
+
+    /*
      * Set locations after all the glyphs are added
      * @param glyphs All the glyphs in the pathway
      */

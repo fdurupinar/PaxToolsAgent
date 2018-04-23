@@ -27,7 +27,7 @@ public class BiopaxApp {
         //String out = conv.addNode(nodeInfo);
 
         //File fIn = new File("src/main/resources/testFile.xml");
-        File fIn = new File("src/main/resources/logicSBGNLong.xml");
+        File fIn = new File("src/main/resources/braf_phosphorylates_erk.xml");
         InputStream in = new FileInputStream(fIn);
 //
 //        File fOut = new File("src/main/resources/testOut.owl");
