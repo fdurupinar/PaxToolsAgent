@@ -27,8 +27,8 @@ cd <Path to PaxToolsAgent>/PaxToolsAgent/out/artifacts/PCArtifact_war_exploded/W
 cp -R . /opt/tomcat/webapps/paxtools/WEB-INF <Path to PaxToolsAgent>/PaxToolsAgent/out/artifacts/PCArtifact_war_exploded/WEB-INF
 ```
 
-** In WEB-INF there is a classes directory with necessary classes and libraries and a web.xml file which includes the name of the server “PaxtoolsServlet".
-** You may need to put slf4j.jar additionally into the out/artifacts/PCArtifact_war_exploded/web-inf/lib folder. 
+- In WEB-INF there is a classes directory with necessary classes and libraries and a web.xml file which includes the name of the server “PaxtoolsServlet".
+- You may need to put slf4j.jar additionally into the out/artifacts/PCArtifact_war_exploded/web-inf/lib folder. 
 
 
 ## Running the Servlet
